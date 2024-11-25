@@ -1,5 +1,4 @@
 #devgaganin
-
 import asyncio
 import time
 import os
@@ -214,6 +213,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
     'm4v', '3gp', '3g2', 'wmv', 'vob', 'ogv', 'ogx', 'qt', 'f4v', 
     'f4p', 'f4a', 'f4b', 'dat', 'rm', 'rmvb', 'asf', 'amv', 'divx'
                 }
+
                 target_chat_id = user_chat_ids.get(chatx, chatx)
                 try:
                     if file_extension in video_extensions:
@@ -250,7 +250,9 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                                 edit,
                                 time.time()
                             )
-                            await devgaganin.copy(LOG_GROUP)
+                        )
+
+                    await devgaganin.copy(LOG_GROUP)
                 except:
                     await app.edit_message_text(sender, edit_id, "The bot is not an admin in the specified chat.") 
                 
@@ -442,8 +444,8 @@ async def set_rename_command(user_id, custom_rename_tag):
 
 # Function to get the user's custom renaming preference
 def get_user_rename_preference(user_id):
-    # Retrieve the user's custom renaming tag if set, or default to 'Team SPY'
-    return user_rename_preferences.get(str(user_id), 'Team SPY')
+    # Retrieve the user's custom renaming tag if set, or default to '@Spark_Developer_Bots'
+    return user_rename_preferences.get(str(user_id), '@Spark_Developer_Bots')
 
 # Function to set custom caption preference
 async def set_caption_command(user_id, custom_caption):
@@ -470,7 +472,7 @@ async def settings_command(event):
         [Button.inline("Remove Words", b'delete'), Button.inline("Reset", b'reset')],
         [Button.inline("Login", b'addsession'), Button.inline("Logout", b'logout')],
         [Button.inline("Set Thumbnail", b'setthumb'), Button.inline("Remove Thumbnail", b'remthumb')],
-        [Button.url("Report Errors To Owner", "https://t.me/Spark_Developer")]
+        [Button.url("Report Errors", "https://t.me/Spark_Developer_Bots")]
     ]
     
     await gf.send_file(
@@ -503,8 +505,8 @@ async def callback_query_handler(event):
         sessions[user_id] = 'setreplacement'
 
     elif event.data == b'addsession':
-        await event.respond("Send me your pyrogram session id")
-        sessions[user_id] = 'addsession' # (If you want to disable session based login just add hashtag in front of this line  and modify response message accordingly)
+        await event.respond("Send me your session ")
+        sessions[user_id] = 'addsession' #(If you want to enable session based login just uncomment this and modify response message accordingly)
 
     elif event.data == b'delete':
         await event.respond("Send words seperated by space to delete them from caption/filename ...")
@@ -522,8 +524,8 @@ async def callback_query_handler(event):
         await event.respond('Please send the photo you want to set as the thumbnail.')
 
     elif event.data == b'reset':
-        user_id_str = str(user_id)
         try:
+            user_id_str = str(user_id)
             collection.update_one(
                 {"_id": user_id},
                 {"$unset": {
@@ -627,4 +629,4 @@ async def handle_user_input(event):
             save_delete_words(user_id, delete_words)
             await event.respond(f"Words added to delete list: {', '.join(words_to_delete)}")
 
-        del sessions[user_id]
+        del sessions[user_id]             
