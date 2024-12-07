@@ -11,4 +11,4 @@ MONGO_DB = getenv("MONGO_DB", "mongodb+srv://vpsrestrictedsaver:AWSrestrictedsav
 LOG_GROUP = getenv("LOG_GROUP", "-1002418022572")
 CHANNEL_ID = int(getenv("CHANNEL_ID", "-1002391820880"))
 FREEMIUM_LIMIT = int(getenv("FREEMIUM_LIMIT", "0"))
-PREMIUM_LIMIT = int(getenv("PREMIUM_LIMIT", "1000"))
+PREMIUM_LIMIT = int(getenv("PREMIUM_LIMIT", "10000000"))
